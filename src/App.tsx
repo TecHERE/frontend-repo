@@ -1,24 +1,10 @@
-import { useState } from "react";
-import axios from "axios";
+import './reset.scss';
+import Calendar from '@/components/Calender';
 
-function App() {
-  const [count, setCount] = useState(0);
-  const testAPI = async () => {
-    const response = await axios.get<Test>(
-      "https://test-3b643-default-rtdb.firebaseio.com/.json"
-    );
-    setCount(response.data.test[1]);
-  };
+export default function App() {
   return (
-    <div className="App">
-      <button onClick={testAPI}>click</button>
-      <h1>{count}</h1>
+    <div>
+      <Calendar />
     </div>
   );
-}
-
-export default App;
-
-interface Test {
-  test: number[];
 }
