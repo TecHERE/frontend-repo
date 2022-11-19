@@ -6,16 +6,20 @@ import { isSameMonth, isSameDay, addDays } from 'date-fns';
 import './style.scss';
 const RenderHeader = ({ currentMonth, prevMonth, nextMonth }: any) => {
   return (
-    <div className="header row">
-      <div className="col col-start">
-        <span className="text">
+    <div className="header">
+      <div className="header_left">
+        <span className="header_left_text">
+          <span className="text year"> {format(currentMonth, 'yyyy')}년</span>
           <span className="text month">{format(currentMonth, 'M')}월</span>
-          {format(currentMonth, 'yyyy')}
         </span>
       </div>
-      <div className="col col-end">
-        <Icon icon="bi:arrow-left-circle-fill" onClick={prevMonth} />
-        <Icon icon="bi:arrow-right-circle-fill" onClick={nextMonth} />
+      <div className="header_right">
+        <div onClick={prevMonth}>
+          <img src="img/왼쪽.png"></img>
+        </div>
+        <div onClick={nextMonth}>
+          <img src="img/오른쪽.png"></img>
+        </div>
       </div>
     </div>
   );
@@ -23,7 +27,7 @@ const RenderHeader = ({ currentMonth, prevMonth, nextMonth }: any) => {
 
 const RenderDays = () => {
   const days = [];
-  const date = ['Sun', 'Mon', 'Thu', 'Wed', 'Thrs', 'Fri', 'Sat'];
+  const date = ['일', '월', '화', '수', '목', '금', '토'];
 
   for (let i = 0; i < 7; i++) {
     days.push(

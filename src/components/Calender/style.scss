@@ -5,4 +5,51 @@
   background: #e5ffe8;
   border: 3px solid #00ff85;
   border-radius: 10px;
+  color: rgba(0, 0, 0, 1);
+}
+.header {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+
+.header_left_text {
+  font-family: 'Abel';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 31px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  & span:nth-child(1) {
+    margin-right: 5px;
+  }
+}
+
+.header_right {
+  display: flex;
+
+  & div {
+    margin: 0px 16px;
+  }
+}
+
+.days {
+  width: 85%;
+  margin: 30px auto;
+
+  font-family: 'Abel';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+
+  color: #000000;
 }
