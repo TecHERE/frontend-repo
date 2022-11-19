@@ -9,8 +9,8 @@ const RenderHeader = ({ currentMonth, prevMonth, nextMonth }: any) => {
     <div className="header">
       <div className="header_left">
         <span className="header_left_text">
-          <span className="text year"> {format(currentMonth, 'yyyy')}년</span>
-          <span className="text month">{format(currentMonth, 'M')}월</span>
+          <span className=" year"> {format(currentMonth, 'yyyy')}년</span>
+          <span className=" month">{format(currentMonth, 'M')}월</span>
         </span>
       </div>
       <div className="header_right">
@@ -37,7 +37,7 @@ const RenderDays = () => {
     );
   }
 
-  return <div className="days row">{days}</div>;
+  return <div className="days">{days}</div>;
 };
 
 const RenderCells = ({ currentMonth, selectedDate, onDateClick }: any) => {
@@ -56,28 +56,33 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }: any) => {
       formattedDate = format(day, 'd');
       const cloneDay: any = day;
       days.push(
-        <div
-          className={`col cell ${
-            !isSameMonth(day, monthStart)
-              ? 'disabled'
-              : isSameDay(day, selectedDate)
-              ? 'selected'
-              : format(currentMonth, 'M') !== format(day, 'M')
-              ? 'not-valid'
-              : 'valid'
-          }`}
-          key={day}
-          onClick={() => onDateClick(cloneDay)}
-        >
-          <span
-            className={
-              format(currentMonth, 'M') !== format(day, 'M')
+        <div>
+          <div
+            className={`col cell ${
+              !isSameMonth(day, monthStart)
+                ? 'disabled'
+                : isSameDay(day, selectedDate)
+                ? 'selected'
+                : format(currentMonth, 'M') !== format(day, 'M')
+                ? 'not-valid'
+                : 'valid'
+            }`}
+            key={day}
+            onClick={() => onDateClick(cloneDay)}
+          ></div>
+          <div
+            className={`
+            ${
+              !isSameMonth(day, monthStart)
+                ? 'disabled'
+                : format(currentMonth, 'M') !== format(day, 'M')
                 ? 'text not-valid'
-                : ''
+                : 'text'
             }
+            `}
           >
             {formattedDate}
-          </span>
+          </div>
         </div>,
       );
       day = addDays(day, 1);
