@@ -1,10 +1,15 @@
 import './reset.scss';
-import Calendar from '@/components/Calender';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Enter from './pages/Enter';
+import Room from './pages/Room';
 
 export default function App() {
   return (
-    <div>
-      <Calendar />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Enter />} />
+        <Route path="/room/:roomId" element={<Room />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
