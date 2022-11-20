@@ -4,6 +4,9 @@
 */
 @import './media.scss';
 
+* {
+  box-sizing: border-box;
+}
 html,
 body,
 div,
