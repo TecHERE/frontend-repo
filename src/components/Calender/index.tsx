@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Icon } from '@iconify/react';
 import { format, addMonths, subMonths } from 'date-fns';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 import { isSameMonth, isSameDay, addDays } from 'date-fns';
@@ -107,7 +106,7 @@ const Calender = () => {
   const nextMonth = () => {
     setCurrentMonth(addMonths(currentMonth, 1));
   };
-  const onDateClick = (day) => {
+  const onDateClick = (day: any) => {
     day = JSON.parse(day);
     setSelectedDate(day);
   };
