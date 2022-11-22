@@ -4,7 +4,6 @@ import dayjs from 'dayjs';
 import { chat } from '@/type';
 
 const Me = ({ name, chat, date }: chat) => {
-  let now = dayjs();
   return (
     <div className={style.ChatRoom_Body_Me}>
       <p>{name}</p>

@@ -28,37 +28,55 @@
 .ChatRoom_Body {
   overflow-y: scroll;
   width: 39rem;
-  height: 64rem;
-
+  height: 640px;
   position: relative;
   background: #d9d9d9;
   border: 1px solid #000000;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
-  padding-bottom: 200px;
+  border: none;
   @include desktop {
-    padding-left: 7rem;
-    padding-right: 7rem;
+    width: 75rem;
+  }
+
+  & > div:nth-child(1) {
+    overflow-y: scroll;
+    height: calc(100% - 150px);
+    padding-bottom: 100px;
   }
 }
 
 .ChatRoom_Body_Input {
-  position: fixed;
+  position: relative;
   width: 100%;
-  bottom: 0;
-  padding: 0 8rem;
+  height: 50px;
+  padding-bottom: 50px;
 
-  @include tablet {
-    padding: 0 11rem;
+  & input {
+    box-sizing: border-box;
+    height: 50px;
+    width: 100%;
+    padding-right: 100px;
   }
 
-  @include desktop {
-    padding: 0 13rem;
+  & button {
+    position: absolute;
+    width: 60px;
+    height: 56px;
+    top: 0px;
+    right: 0;
   }
 }
 .ChatRoom_Body {
   -ms-overflow-style: none;
 }
 .ChatRoom_Body::-webkit-scrollbar {
+  display: none;
+}
+
+.ChatRoom_Body_list {
+  -ms-overflow-style: none;
+}
+.ChatRoom_Body_list::-webkit-scrollbar {
   display: none;
 }

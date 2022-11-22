@@ -60,34 +60,32 @@ const ChatRoom = () => {
   };
 
   const sendPressChat = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.code != 'Enter' || e.key == 'Enter') {
-      return;
+    if (e.currentTarget.value.length !== 0 && e.key === 'Enter') {
+      setChatList([
+        ...chatList,
+        {
+          name: nick,
+          chat: inputRef.current.value,
+          date: new Date(),
+        },
+      ]);
+      inputRef.current.focus();
+      setChat('');
+
+      bodyRef.current.scrollTo({
+        top: bodyRef.current.scrollHeight,
+        behavior: 'smooth',
+      });
+
+      inputRef.current.value = '';
     }
-    if (inputRef.current.value == '') return;
-    setChatList([
-      ...chatList,
-      {
-        name: nick,
-        chat: inputRef.current.value,
-        date: new Date(),
-      },
-    ]);
-    inputRef.current.focus();
-    setChat('');
-
-    bodyRef.current.scrollTo({
-      top: bodyRef.current.scrollHeight,
-      behavior: 'smooth',
-    });
-
-    inputRef.current.value = '';
   };
 
   return (
     <div className={style.ChatBox}>
       <div className={style.ChatRoom_Title}>Room No. {id}</div>
-      <div ref={bodyRef} className={style.ChatRoom_Body}>
-        <div>
+      <div className={style.ChatRoom_Body}>
+        <div ref={bodyRef} className={style.ChatRoom_Body_list}>
           {chatList.map((v, i) => {
             return v.name == '승환' ? (
               <Me key={i} name={v.name} chat={v.chat} date={v.date} />
