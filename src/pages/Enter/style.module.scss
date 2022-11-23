@@ -1,0 +1,49 @@
+@import '../../media.scss';
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.inputContainer {
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  min-height: 40vh;
+  min-width: 40vw;
+  background-color: white;
+  flex-direction: column;
+}
+
+.inputBox {
+  width: 100%;
+  margin-bottom: 3rem;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.labelStyle {
+  font-size: 20px;
+}
+
+.button {
+  width: 10rem;
+  height: 4rem;
+  border: 1px solid black;
+  border-radius: 20px;
+  background-color: #e5ffce;
+  font-size: 2rem;
+  cursor: pointer;
+  outline: none;
+  &:hover {
+    opacity: 0.8;
+  }
+}
