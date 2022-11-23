@@ -11,6 +11,7 @@
 .h1 {
   font-size: 3rem;
   font-weight: bold;
+  margin-bottom: 1rem;
 }
 
 .inputContainer {
@@ -25,22 +26,24 @@
 
 .inputBox {
   width: 100%;
+  height: 3rem;
   margin-bottom: 3rem;
-  border-radius: 5px;
-  font-size: 20px;
+  border-radius: 10px;
+  border: 1px solid black;
+  font-size: 1rem;
 }
 
 .labelStyle {
-  font-size: 20px;
+  font-size: 1.5rem;
 }
 
 .button {
-  width: 10rem;
-  height: 4rem;
+  width: 7rem;
+  height: 3rem;
   border: 1px solid black;
   border-radius: 20px;
   background-color: #e5ffce;
-  font-size: 2rem;
+  font-size: 1.5rem;
   cursor: pointer;
   outline: none;
   &:hover {

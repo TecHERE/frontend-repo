@@ -1,10 +1,10 @@
 import './reset.scss';
-import Calendar from '@/components/Calender';
+import Enter from '@/pages/Enter';
 
 export default function App() {
   return (
     <div>
-      <Calendar />
+      <Enter />
     </div>
   );
 }
