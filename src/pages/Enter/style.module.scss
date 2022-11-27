@@ -38,15 +38,18 @@
 }
 
 .button {
-  width: 7rem;
-  height: 3rem;
+  width: 5rem;
+  height: 2rem;
   border: 1px solid black;
   border-radius: 20px;
   background-color: #e5ffce;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   cursor: pointer;
   outline: none;
+  opacity: 1;
+  transition: opacity 0.5s;
+
   &:hover {
-    opacity: 0.8;
+    opacity: 0.6;
   }
 }

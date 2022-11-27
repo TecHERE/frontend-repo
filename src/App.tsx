@@ -8,7 +8,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Enter />} />
-        <Route path="/room" element={<ChatRoom />} />
+        <Route path="/room/:roomID" element={<ChatRoom />} />
       </Routes>
     </BrowserRouter>
   );
