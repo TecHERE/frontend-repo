@@ -1,6 +1,6 @@
 import { QueryClient } from '@tanstack/react-query';
 import axios, { AxiosRequestConfig } from 'axios';
-import request, { RequestDocument } from 'graphql-request';
+import { request, RequestDocument } from 'graphql-request';
 
 type AnyOBJ = {
   [key: string]: any;
