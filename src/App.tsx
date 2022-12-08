@@ -1,15 +1,17 @@
-import './reset.scss';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Enter from './pages/Enter';
-import Room from './pages/Room';
+import '@/reset.scss';
+import { useRoutes } from 'react-router-dom';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { getClient } from './queryClient';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { routes } from '@/Routes';
 
 export default function App() {
+  const queryClient = getClient();
+  const elem = useRoutes(routes);
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Enter />} />
-        <Route path="/room/:roomId" element={<Room />} />
-      </Routes>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      {elem}
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   );
 }
