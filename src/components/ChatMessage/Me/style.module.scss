@@ -1,0 +1,39 @@
+.ChatRoom_Body_Me {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 15px;
+
+  & p {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  & > div {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  & div :nth-child(2) {
+    width: 10rem;
+    height: 3.5rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0.5rem;
+    font-family: 'NanumGothic';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1.4rem;
+    /* identical to box height */
+
+    color: #000000;
+
+    background: #e5ffce;
+    border: 1px solid #000000;
+    border-radius: 10px;
+  }
+}
