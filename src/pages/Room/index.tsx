@@ -28,7 +28,7 @@ const DUMMY_CHAT: ChatMessage[] = [
   },
 ];
 
-export default function Room() {
+export default function RoomPage() {
   const { roomId } = useParams();
   const { nickname } = useLocation().state;
   const chatListRef = useRef<HTMLUListElement>(null);
