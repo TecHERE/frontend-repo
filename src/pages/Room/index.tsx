@@ -4,6 +4,9 @@ import { useLocation, useParams } from 'react-router-dom';
 import { ChatMessage } from '@/types';
 import MyMessage from '@/components/ChatMessage/MyMessage';
 import OthersMessage from '@/components/ChatMessage/OthersMessage';
+import useStomp from '@/hooks/useStomp';
+import { Client, IMessage } from '@stomp/stompjs';
+import useInput from '@/hooks/useInput';
 
 const DUMMY_CHAT: ChatMessage[] = [
   {
@@ -32,11 +35,12 @@ export default function Room() {
   const { roomId } = useParams();
   const { nickname } = useLocation().state;
   const chatListRef = useRef<HTMLUListElement>(null);
+
+  /** 채팅 히스토리 리스트를 담을 state */
   const [chatList, setChatList] = useState(DUMMY_CHAT);
-  const [message, setMessage] = useState('');
-  const onChatInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setMessage(e.target.value);
-  };
+  const [message, onChatInput, setMessage] = useInput('');
+
+  /** 엔터 버튼을 통한 채팅 보내기 함수 */
   const onKeyDownEnter = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (
       e.currentTarget.value.length !== 0 &&
@@ -45,17 +49,8 @@ export default function Room() {
       e.nativeEvent.isComposing === false
     ) {
       e.preventDefault();
-      onSubmit();
+      handlePub();
     }
-  };
-  const onSubmit = () => {
-    const data = {
-      nickname,
-      message,
-      date: new Date(),
-    };
-    setChatList((prev) => [...prev, data]);
-    setMessage('');
   };
   const scrollToBottom = () => {
     chatListRef.current?.scrollTo({
@@ -63,6 +58,40 @@ export default function Room() {
       behavior: 'smooth',
     });
   };
+
+  /** useRef() 훅을 사용해 속성 값이 변경돼도 재렌더링하지 않고, 다시 렌더링하더라도 값이 유실되지 않도록 클라이언트를 current 속성에 만든다. */
+  const client = useRef<Client>();
+
+  /** 응답받은 body를 채팅 목록 배열에 push */
+  const handleSub = (body: IMessage) => {
+    const json_body = JSON.parse(body.body);
+    setChatList((_chat_list: ChatMessage[]) => [..._chat_list, json_body]);
+  };
+
+  /** 채팅 데이터를 destination에 publish */
+  const handlePub = () => {
+    if (!client.current?.connected) return;
+    client.current.publish({
+      destination: '/pub/chat',
+      body: JSON.stringify({
+        nickname: '상민',
+        message,
+        date: new Date().getTime(),
+      }),
+    });
+    setMessage('');
+  };
+
+  const [connect, disconnect] = useStomp(client, 'sub_destination', handleSub);
+
+  useEffect(() => {
+    connect();
+    /* 
+      chatList 받아와서 setChatList 하는 로직 작성
+    */
+    return () => disconnect();
+  }, []);
+
   useEffect(() => {
     scrollToBottom();
   }, [chatList]);
@@ -96,7 +125,7 @@ export default function Room() {
             onChange={onChatInput}
             onKeyDown={onKeyDownEnter}
           />
-          <button className={styles.chatSubmit} onClick={onSubmit}>
+          <button className={styles.chatSubmit} onClick={handlePub}>
             전송
           </button>
         </div>
