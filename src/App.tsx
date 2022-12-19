@@ -8,6 +8,7 @@ import { routes } from '@/Routes';
 export default function App() {
   const queryClient = getClient();
   const elem = useRoutes(routes);
+  console.log('test');
   return (
     <QueryClientProvider client={queryClient}>
       {elem}

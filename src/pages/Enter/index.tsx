@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss';
 
-export default function Enter() {
+export default function EnterPage() {
   const navigate = useNavigate();
   const [nickname, setNickname] = useState('');
   const [roomId, setRoomId] = useState('');
