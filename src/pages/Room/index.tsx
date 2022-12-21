@@ -87,7 +87,7 @@ export default function Room() {
   useEffect(() => {
     connect();
     /* 
-      chatList 받아와서 setChatList 하는 로직 작성
+      TODO: chatList 받아와서 setChatList 하는 로직 작성
     */
     return () => disconnect();
   }, []);
