@@ -26,7 +26,8 @@ export const getClient = (() => {
   };
 })();
 
-const BASE_URL = `/`;
+const { VITE_BASE_URL } = import.meta.env;
+const BASE_URL = VITE_BASE_URL;
 
 export const restFetcher = async ({
   method,
@@ -45,10 +46,9 @@ export const restFetcher = async ({
       method,
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': BASE_URL,
       },
     };
-    if (body) axiosConfig.data = JSON.stringify(body);
+    if (body) axiosConfig.data = body;
     if (params) {
       const searchParams = new URLSearchParams(params);
       url += '?' + searchParams.toString();

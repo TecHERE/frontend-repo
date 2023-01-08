@@ -10,35 +10,36 @@ import useInput from '@/hooks/useInput';
 
 const DUMMY_CHAT: ChatMessage[] = [
   {
-    nickname: '상민',
-    message: '안녕하세요',
+    author: '상민',
+    content: '안녕하세요',
     date: new Date('2022-11-20 22:12'),
   },
   {
-    nickname: '승환',
-    message: '안녕하세요~~~!!',
+    author: '승환',
+    content: '안녕하세요~~~!!',
     date: new Date('2022-11-20 22:14'),
   },
   {
-    nickname: '호병',
-    message: '안녕하십니까 !!',
+    author: '호병',
+    content: '안녕하십니까 !!',
     date: new Date('2022-11-20 22:29'),
   },
   {
-    nickname: '상민',
-    message: '반가워요 !',
+    author: '상민',
+    content: '반가워요 !',
     date: new Date('2022-11-20 23:34'),
   },
 ];
 
 export default function Room() {
+  const { VITE_PUBLISH_URL, VITE_SUBSCRIBE_URL } = import.meta.env;
   const { roomId } = useParams();
-  const { nickname } = useLocation().state;
+  const { author } = useLocation().state;
   const chatListRef = useRef<HTMLUListElement>(null);
 
   /** 채팅 히스토리 리스트를 담을 state */
   const [chatList, setChatList] = useState(DUMMY_CHAT);
-  const [message, onChatInput, setMessage] = useInput('');
+  const [content, onChatInput, setContent] = useInput('');
 
   /** 엔터 버튼을 통한 채팅 보내기 함수 */
   const onKeyDownEnter = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -72,17 +73,17 @@ export default function Room() {
   const handlePub = () => {
     if (!client.current?.connected) return;
     client.current.publish({
-      destination: '/pub/chat',
+      destination: VITE_PUBLISH_URL,
       body: JSON.stringify({
-        nickname: '상민',
-        message,
-        date: new Date().getTime(),
+        author: '상민',
+        content,
+        // date: new Date().getTime(),
       }),
     });
-    setMessage('');
+    setContent('');
   };
 
-  const [connect, disconnect] = useStomp(client, 'sub_destination', handleSub);
+  const [connect, disconnect] = useStomp(client, VITE_SUBSCRIBE_URL, handleSub);
 
   useEffect(() => {
     connect();
@@ -102,17 +103,17 @@ export default function Room() {
         <ul ref={chatListRef} className={styles.chatList}>
           {chatList.map((chat, idx) => (
             <li key={idx}>
-              {chat.nickname === nickname ? (
+              {chat.author === author ? (
                 <MyMessage
-                  nickname={chat.nickname}
-                  message={chat.message}
-                  date={chat.date}
+                  author={chat.author}
+                  content={chat.content}
+                  date={chat.date || new Date()}
                 />
               ) : (
                 <OthersMessage
-                  nickname={chat.nickname}
-                  message={chat.message}
-                  date={chat.date}
+                  author={chat.author}
+                  content={chat.content}
+                  date={chat.date || new Date()}
                 />
               )}
             </li>
@@ -121,7 +122,7 @@ export default function Room() {
         <div className={styles.messageInput}>
           <textarea
             className={styles.chatInput}
-            value={message}
+            value={content}
             onChange={onChatInput}
             onKeyDown={onKeyDownEnter}
           />

@@ -1,5 +1,5 @@
 export interface ChatMessage {
-  nickname: string;
-  message: string;
-  date: Date;
+  author: string;
+  content: string;
+  date?: Date;
 }

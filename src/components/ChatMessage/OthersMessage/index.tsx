@@ -4,21 +4,21 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 
 interface OthersMessageProps {
-  nickname: string;
-  message: string;
+  author: string;
+  content: string;
   date: Date;
 }
 
 export default function OthersMessage({
-  nickname,
-  message,
+  author,
+  content,
   date,
 }: OthersMessageProps) {
   return (
     <div className={styles.container}>
-      <h1>{nickname}</h1>
+      <h1>{author}</h1>
       <div className={styles.messageBox}>
-        <div className={styles.message}>{message}</div>
+        <div className={styles.message}>{content}</div>
         <p className={styles.time}>{dayjs(date).format('h:mm A')}</p>
       </div>
     </div>
